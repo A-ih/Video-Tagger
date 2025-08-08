@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Video Tagger</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Video Tagger</h1>
+    <p class="subtitle">抽取影片關鍵畫面並以大型視覺語言模型自動標註（本機 Ollama 或 OpenRouter）。</p>
+
+    <div class="card">
+      <div class="row">
+        <label>模型來源</label>
+        <div class="toggle">
+          <button id="btn-ollama" class="toggle-btn active">本機（Ollama）</button>
+          <button id="btn-openrouter" class="toggle-btn">OpenRouter</button>
+        </div>
+        <div class="hint" id="model-hint">使用：—（Ollama）</div>
+        <div class="row" id="ollama-model-row" style="margin-top:8px;">
+          <label for="ollama-model-select">選擇本機模型</label>
+          <select id="ollama-model-select"></select>
+          <button id="ollama-model-apply">套用</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <label for="numFrames">關鍵畫面張數</label>
+        <input id="numFrames" type="number" min="1" max="48" value="8" />
+      </div>
+
+      <div class="row">
+        <label for="video">選擇影片</label>
+        <input id="video" type="file" accept="video/*" />
+      </div>
+
+      <div class="actions">
+        <button id="analyzeBtn">開始分析</button>
+        <button id="abortBtn" style="margin-left:8px;background:#b3261e;color:#fff;display:none;">中止</button>
+      </div>
+    </div>
+
+    <div id="progress" class="progress" style="display:none;"></div>
+    <div id="timer" class="hint" style="display:none;">用時：0 秒</div>
+
+    <h3 class="section-title">關鍵畫面預覽</h3>
+    <div id="frames" class="frames"></div>
+
+    <div class="result-header">
+      <h3 class="section-title">分析結果</h3>
+      <div class="result-controls">
+        <button id="toggleJsonBtn">顯示 JSON</button>
+        <button id="copyJsonBtn">複製 JSON</button>
+        <button id="downloadJsonBtn">下載 JSON</button>
+      </div>
+    </div>
+
+    <div id="analysis-human" class="analysis"></div>
+    <pre id="analysis-json" class="result" style="display:none;"></pre>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html> 
